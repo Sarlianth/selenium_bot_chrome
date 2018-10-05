@@ -1,7 +1,12 @@
 package com.thecrims;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -9,9 +14,22 @@ import javax.swing.border.EmptyBorder;
 
 public class Run_JFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	JLabel nicknameLabel;
-	JLabel respectLabel;
+	static JLabel respectLabel;
+	Core core;
+	Character c = new Character();
+	Robbery r = new Robbery();
+	NightLife n = new NightLife();
+	Hospital h = new Hospital();
+	Thread t;
+	static JLabel runLabel;
+	private JButton btnLogout;
+	static Run_JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -20,7 +38,7 @@ public class Run_JFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Run_JFrame frame = new Run_JFrame();
+					frame = new Run_JFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +52,7 @@ public class Run_JFrame extends JFrame {
 	 */
 	public Run_JFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 261, 170);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -56,23 +74,68 @@ public class Run_JFrame extends JFrame {
 		respectLabel.setBounds(87, 36, 263, 14);
 		contentPane.add(respectLabel);
 
+		JButton btnStart = new JButton("Start");
+		btnStart.setFont(new Font("Arial", Font.PLAIN, 10));
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				RunThread worker = new RunThread(core, c, r, n, h);
+				t = new Thread(worker);
+				t.start();
+				runLabel.setForeground(Color.GREEN);
+				runLabel.setText("Running..");
+			}
+		});
+		btnStart.setBounds(10, 98, 67, 23);
+		contentPane.add(btnStart);
+
+		JButton btnStop = new JButton("Stop");
+		btnStop.setFont(new Font("Arial", Font.PLAIN, 10));
+		btnStop.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent e) {
+				t.stop();
+				runLabel.setForeground(Color.RED);
+				runLabel.setText("Stopped..");
+			}
+		});
+		btnStop.setBounds(87, 98, 67, 23);
+		contentPane.add(btnStop);
+
+		runLabel = new JLabel("");
+		runLabel.setBounds(66, 73, 119, 14);
+		contentPane.add(runLabel);
+
+		btnLogout = new JButton("Logout");
+		btnLogout.setFont(new Font("Arial", Font.PLAIN, 10));
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (t != null)
+					btnStop.doClick();
+				core.closeBrowser();
+				Login_JFrame.frame.setVisible(true);
+				// setVisible(false);
+				dispose();
+			}
+		});
+		btnLogout.setBounds(164, 98, 67, 23);
+		contentPane.add(btnLogout);
+
 		initialSetup();
 	}
 
 	public void initialSetup() {
-		Core core = new Core();
+		core = new Core();
 		core.openBrowser();
 
-		new Login(Login_JFrame.frame.loginTxt.getText(), Login_JFrame.frame.passwordTxt.getText());
+		char[] passByte = Login_JFrame.frame.passwordTxt.getPassword();
+		String password = new String(passByte);
 
-		Character c = new Character();
-		Robbery r = new Robbery();
-		NightLife n = new NightLife();
-		Hospital h = new Hospital();
+		new Login(Login_JFrame.frame.loginTxt.getText(), password);
 
 		c.populateCharacter();
 		nicknameLabel.setText(c.getNickname().toString());
 		respectLabel.setText(c.getRespect().toString());
-
+		setTitle(c.getNickname().toUpperCase());
 	}
 }

@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -21,8 +22,8 @@ public class Login_JFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	public JTextField loginTxt;
-	public JTextField passwordTxt;
 	static Login_JFrame frame;
+	public JPasswordField passwordTxt;
 
 	/**
 	 * Launch the application.
@@ -58,12 +59,6 @@ public class Login_JFrame extends JFrame {
 		contentPane.add(loginTxt);
 		loginTxt.setColumns(10);
 
-		passwordTxt = new JTextField();
-		passwordTxt.setFont(new Font("Arial", Font.PLAIN, 13));
-		passwordTxt.setBounds(80, 82, 171, 27);
-		contentPane.add(passwordTxt);
-		passwordTxt.setColumns(10);
-
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblLogin.setBounds(10, 44, 60, 14);
@@ -75,13 +70,14 @@ public class Login_JFrame extends JFrame {
 		contentPane.add(lblPassword);
 
 		JButton btnLogin = new JButton("Login");
+		btnLogin.setFont(new Font("Arial", Font.PLAIN, 10));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Run_JFrame run = new Run_JFrame();
 				run.setLocationRelativeTo(null);
 				run.setVisible(true);
-				// loginTxt.setText("");
-				// passwordTxt.setText("");
+				loginTxt.setText("");
+				passwordTxt.setText("");
 				frame.setVisible(false);
 			}
 		});
@@ -89,6 +85,7 @@ public class Login_JFrame extends JFrame {
 		contentPane.add(btnLogin);
 
 		JButton btnClear = new JButton("Clear");
+		btnClear.setFont(new Font("Arial", Font.PLAIN, 10));
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				loginTxt.setText("");
@@ -103,6 +100,9 @@ public class Login_JFrame extends JFrame {
 		lblTheCrimsBot.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblTheCrimsBot.setBounds(80, 11, 171, 14);
 		contentPane.add(lblTheCrimsBot);
-	}
 
+		passwordTxt = new JPasswordField();
+		passwordTxt.setBounds(80, 83, 171, 27);
+		contentPane.add(passwordTxt);
+	}
 }
