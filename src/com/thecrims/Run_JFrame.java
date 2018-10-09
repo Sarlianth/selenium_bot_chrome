@@ -80,9 +80,17 @@ public class Run_JFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				RunThread worker = new RunThread(core, c, r, n, h);
 				t = new Thread(worker);
-				t.start();
-				runLabel.setForeground(Color.GREEN);
-				runLabel.setText("Running..");
+				try {
+					t.start();
+					runLabel.setForeground(Color.GREEN);
+					runLabel.setText("Running..");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					t.stop();
+					System.out.println(e);
+					runLabel.setForeground(Color.RED);
+					runLabel.setText("Stopped..");
+				}
 			}
 		});
 		btnStart.setBounds(10, 98, 67, 23);

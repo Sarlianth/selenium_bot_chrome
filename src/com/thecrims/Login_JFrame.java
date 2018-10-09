@@ -70,7 +70,7 @@ public class Login_JFrame extends JFrame {
 		contentPane.add(lblPassword);
 
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setFont(new Font("Arial", Font.PLAIN, 10));
+		btnLogin.setFont(new Font("Dialog", Font.PLAIN, 8));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Run_JFrame run = new Run_JFrame();
@@ -81,18 +81,18 @@ public class Login_JFrame extends JFrame {
 				frame.setVisible(false);
 			}
 		});
-		btnLogin.setBounds(80, 118, 80, 23);
+		btnLogin.setBounds(80, 118, 50, 23);
 		contentPane.add(btnLogin);
 
 		JButton btnClear = new JButton("Clear");
-		btnClear.setFont(new Font("Arial", Font.PLAIN, 10));
+		btnClear.setFont(new Font("Dialog", Font.PLAIN, 8));
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				loginTxt.setText("");
 				passwordTxt.setText("");
 			}
 		});
-		btnClear.setBounds(171, 118, 80, 23);
+		btnClear.setBounds(140, 118, 50, 23);
 		contentPane.add(btnClear);
 
 		JLabel lblTheCrimsBot = new JLabel("The Crims Bot");
@@ -104,5 +104,15 @@ public class Login_JFrame extends JFrame {
 		passwordTxt = new JPasswordField();
 		passwordTxt.setBounds(80, 83, 171, 27);
 		contentPane.add(passwordTxt);
+
+		JButton buttonExit = new JButton("Exit");
+		buttonExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		buttonExit.setFont(new Font("Dialog", Font.PLAIN, 8));
+		buttonExit.setBounds(201, 118, 50, 23);
+		contentPane.add(buttonExit);
 	}
 }

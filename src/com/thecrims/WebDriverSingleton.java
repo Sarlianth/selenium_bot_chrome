@@ -13,7 +13,7 @@ public class WebDriverSingleton {
 			System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
 
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--incognito --headless");
+			options.addArguments("--incognito");
 
 			driver = new ChromeDriver(options);
 		}
