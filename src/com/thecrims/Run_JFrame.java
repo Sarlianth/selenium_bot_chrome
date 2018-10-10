@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -133,17 +134,30 @@ public class Run_JFrame extends JFrame {
 	}
 
 	public void initialSetup() {
-		core = new Core();
-		core.openBrowser();
+		try {
+			core = new Core();
+			core.openBrowser();
 
-		char[] passByte = Login_JFrame.frame.passwordTxt.getPassword();
-		String password = new String(passByte);
+			char[] passByte = Login_JFrame.frame.passwordTxt.getPassword();
+			String password = new String(passByte);
 
-		new Login(Login_JFrame.frame.loginTxt.getText(), password);
+			new Login(Login_JFrame.frame.loginTxt.getText(), password);
 
-		c.populateCharacter();
-		nicknameLabel.setText(c.getNickname().toString());
-		respectLabel.setText(c.getRespect().toString());
-		setTitle(c.getNickname().toUpperCase());
+			c.populateCharacter();
+			nicknameLabel.setText(c.getNickname().toString());
+			respectLabel.setText(c.getRespect().toString());
+			setTitle(c.getNickname().toUpperCase());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(
+					"Oops.. something went wrong with initial setup.. Maybe an update going on?.. Check browser and/or Run_JFrame/initialSetup() ");
+			JOptionPane.showMessageDialog(this, "Website down.. going to retry in 10s..");
+			try {
+				Thread.sleep(10000);
+				initialSetup();
+			} catch (InterruptedException e2) {
+				e2.printStackTrace();
+			}
+		}
 	}
 }

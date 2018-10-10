@@ -17,9 +17,10 @@ public class RunThread implements Runnable {
 	}
 
 	public void run() {
-		while (core.getDriver() == WebDriverSingleton.getInstance()) {
-			c.populateCharacter();
-			Run_JFrame.respectLabel.setText(c.getRespect().toString());
+		try {
+			while (core.getDriver() == WebDriverSingleton.getInstance()) {
+				c.populateCharacter();
+				Run_JFrame.respectLabel.setText(c.getRespect().toString());
 
 //			String isHostpital = core.getElementValueByXpath("//*[@id=\"menu-hospital\"]/span");
 //			if (isHostpital.equalsIgnoreCase("Hospital")) {
@@ -27,15 +28,19 @@ public class RunThread implements Runnable {
 //				Run_JFrame.runLabel.setText("You're in a hospital.. Check your profile :(..");
 //			}
 
-			if (c.getAddiction() >= 2) {
-				h.cureAddiction();
-			}
+				if (c.getAddiction() >= 3) {
+					h.cureAddiction();
+				}
 
-			if (c.getStamina() < 5) {
-				n.doDrugs();
-			}
+				if (c.getStamina() < 15) {
+					n.doDrugs();
+				}
 
-			r.toRob(c, n);
+				r.toRob(c, n);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Oops.. something went wrong with run() method.. -->" + e);
 		}
 	}
 }

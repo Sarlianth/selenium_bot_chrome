@@ -58,6 +58,7 @@ public class Login_JFrame extends JFrame {
 		loginTxt.setBounds(80, 37, 171, 27);
 		contentPane.add(loginTxt);
 		loginTxt.setColumns(10);
+		loginTxt.setText("Sarlianth");
 
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setHorizontalAlignment(SwingConstants.RIGHT);

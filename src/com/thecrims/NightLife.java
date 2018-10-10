@@ -23,10 +23,10 @@ public class NightLife extends Core {
 
 			if (type.equalsIgnoreCase("painkillers")) {
 				this.setElementValueByXpath("//*[@id=\"content_middle\"]/div/div[3]/div/table[2]/tbody/tr/td[4]/input",
-						"80");
+						"99");
 			} else if (type.equalsIgnoreCase("booze")) {
 				this.setElementValueByXpath("//*[@id=\"content_middle\"]/div/div[3]/div/table[2]/tbody/tr/td[4]/input",
-						"45");
+						"51");
 			} else if (type.equalsIgnoreCase("weed")) {
 				this.setElementValueByXpath("//*[@id=\"content_middle\"]/div/div[3]/div/table[2]/tbody/tr/td[4]/input",
 						"51");
@@ -38,7 +38,7 @@ public class NightLife extends Core {
 			this.clickElementByXpath("//*[@id=\"content_middle\"]/div/div[3]/div/table[2]/tbody/tr/td[4]/button");
 		} catch (Exception e) {
 			System.out.println("Oops.. Problem with night life...");
-			System.out.println("Exception: " + e);
+			// System.out.println("Exception: " + e);
 		}
 	}
 
