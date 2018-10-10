@@ -130,6 +130,7 @@ public class Core {
 				}
 			}
 		}
+		
 
 		if (!safeOption.getText().contains("Choose") || c.getStamina() > 5) {
 			safeOption.click();

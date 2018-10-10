@@ -4,11 +4,11 @@ public class Robbery extends Core {
 
 	public void toRob(Character c, NightLife n) {
 		try {
-			this.waitSeconds(2000);
+			this.waitSeconds(700);
 
 			this.clickElementById("menu-robbery");
 
-			this.waitSeconds(2000);
+			this.waitSeconds(700);
 
 			this.clickElementByCssSelector(
 					"#content_middle > div > div:nth-child(3) > div:nth-child(4) > div > table > tr > td:nth-child(1) > select");
